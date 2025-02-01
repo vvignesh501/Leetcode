@@ -1,3 +1,9 @@
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
 class Solution:
     def reverseList(self, head: ListNode) -> ListNode:
         # Initialize pointers
@@ -18,4 +24,10 @@ class Solution:
         return prev
 
 
-sol = Solution().reverseList(
+c = Solution()
+node = ListNode([1])
+node.next = ListNode([2])
+node.next.next = ListNode([3])
+node.next.next.next = ListNode([4])
+res = c.swapPairs(node)
+print(res)
