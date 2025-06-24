@@ -1,22 +1,25 @@
 class Solution:
-    def minDistance(self, str1: str, str2: str) -> int:
-        dp = [[float("inf")] * (len(str2) + 1) for c in range(len(str1) + 1)]
+    def minDistance(self, word1: str, word2: str) -> int:
 
-        for j in range(len(str2) + 1):
-            dp[len(str1)][j] = len(str2) - j
+        dp = [[0 for _ in range(len(word2) + 1)]for _ in range(len(word1) + 1)]
 
-        for k in range(len(str1) + 1):
-            dp[k][len(str2)] = len(str1) - k
+        r = len(word1)
+        c = len(word2)
 
-        for i in range(len(str1) - 1, -1, -1):
-            for j in range(len(str2) - 1, -1, -1):
-                if str1[i] == str2[j]:
+        for i in range(r + 1):
+            dp[i][c] = r - i
+
+        for j in range(c + 1):
+            dp[r][j] = c - j
+
+        for i in range(r -1, -1, -1):
+            for j in range(c - 1, -1, -1):
+                if word1[i] == word2[j]:
                     dp[i][j] = dp[i + 1][j + 1]
                 else:
-                    dp[i][j] = 1 + min(dp[i][j + 1], dp[i + 1][j], dp[i + 1][j + 1])
-
+                    dp[i][j] = 1 + min(dp[i][j + 1], dp[i+1][j], dp[i+1][j+1])
+        
         return dp[0][0]
-
 
 out = Solution().minDistance("horse", "ros")
 print(out)
